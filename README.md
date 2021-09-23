@@ -5,9 +5,8 @@ This path planner is intended for computing a global path in a row-based crops m
 2. A* based planner: used to compute the path between two different vine rows
 
 ## Content of the directory
-- _A\_star\_planner.py_ contains the class and methods used for the A* based path planning.
-- _Gradient.py_ contains the class and methods used for the gradient based path planning.
-- _Hybrid\_planner.py_ is the orchestrator of the overall system, switching from the two planners according to the provided control points.
+- _utils_ contains the classes and methods used for path planning.
+- _main.py_ is the entry point and orchestrator of the overall system, switching from the two planners according to the provided control points.
 - _dataset_ is a directory containing different masks with the related waypoints and it is organized in the following manner:
     1. _satellite_ and _train_ contain the real word and synthetic dataset used for experimentation, respectively.
         1. _imgX_ are the mask images numbered from 1 to 100.
