@@ -4,6 +4,7 @@ import numpy as np
 from PIL import Image
 from pylab import *
 import json
+from scipy import io
 
 '''This planner is responsible for finding the minimum cost path 
 between a starting point to an end point exploiting the gradient descent principle.'''
@@ -71,9 +72,9 @@ class Gradient():
             next_y = node_y + motion[1]
             flag_visited = 0
             flag_obst = 0
-            if self.visited.has_key((next_x,next_y)):
+            if (next_x,next_y) in self.visited.keys():
                 flag_visited = 1
-            if self.obstacles.has_key((next_x,next_y)):
+            if (next_x,next_y) in self.obstacles.keys():
                 flag_obst = 1
             if costmap[next_y][next_x] < actual_cost and flag_visited==0 and flag_obst==0:
                 actual_cost = costmap[next_y][next_x]
@@ -117,7 +118,10 @@ class Gradient():
     # It works as a interface between the hybrid planner and the gradient class
     def path_planning(self,sx,sy,gx,gy,min_x, max_x, min_y, max_y,kernel_size):
         costmap_goal = self.calc_costmap_wrt_goal(min_x,max_x,min_y,max_y,gx,gy)
+        costmap_blurring = self.K_blurring*self.compute_costmap_blurring(self.im,kernel_size)
         tot_costmap = self.K_blurring*self.compute_costmap_blurring(self.im,kernel_size) + costmap_goal
 
+        data = {"costmap_goal" : costmap_goal, "costmap_blurring": costmap_blurring, "costmap_tot": tot_costmap}
+        io.savemat("costmaps.mat",data)
         path = self.calc_min_cost_path(tot_costmap,sx,sy,gx,gy)
         return path

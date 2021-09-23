@@ -1,7 +1,7 @@
 {
-    "base_path" : "./dataset/satellite/",
-    "mask_image":"img1.png",
-    "control_points_file" : "waypoints1.npy",
+    "base_path" : "./Grugliasco/",
+    "mask_image":"mask.jpg",
+    "control_points_file" : "waypoints_grugliasco.npy",
     "threshold": 5,
     "K_goal_gradient" : 10,
     "K_blurring_gradient" : 1,

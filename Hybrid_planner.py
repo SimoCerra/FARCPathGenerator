@@ -64,6 +64,8 @@ def compute_costmap_a_star(image_path,kernel_size):
     # It transforms the mask image in a bit-like image in order to detect occupied cells and free ones
     # 255 = obstacle, 0 = free space
     ret, bw_img = cv.threshold(blur_image,dynamic_th,255,cv.THRESH_BINARY_INV)
+    #ret, bw_img_save = cv.threshold(blur_image,dynamic_th,255,cv.THRESH_BINARY)
+    #cv.imwrite("costmap_astar.png",bw_img_save)
 
     return bw_img
 
@@ -115,13 +117,14 @@ if __name__=="__main__":
         sy = control_array[i][1]
         gx = control_array[i+1][0]
         gy = control_array[i+1][1]
+        print(f"sx: {sx},sy: {sy},gx: {gx},gy: {gy}")
         kernel_size = compute_kernel_size([[sx,sy],[gx,gy]],np.array(obst_reduced))
         if i%2==0:
             min_x = min(sx,gx) - 2*REDUCED_MARGIN_LIMIT
             max_x = max(sx,gx) + 2*REDUCED_MARGIN_LIMIT
             min_y = min(sy,gy) - 2*REDUCED_MARGIN_LIMIT
             max_y = max(sy,gy) + 2*REDUCED_MARGIN_LIMIT
-            
+            print(f"min_x: {min_x}, min_y: {min_y}, max_x: {max_x}, max_y: {max_y}")
             # This is the case when control points are very close to vine rows
             if kernel_size == 1:
                 kernel_size = data["kernel_size_gradient"]
