@@ -1,12 +1,12 @@
 '''
 Author: Simone Cerrato
 '''
-from A_star_planner import *
-from Gradient import *
+from utils.A_star_planner import *
+from utils.Gradient import *
 import time
 from scipy.ndimage import convolve
 
-'''This planner is intended for orchestrating the total path planning problem. It loops over
+'''The main is intended for orchestrating the total path planning problem. It loops over
 the waypoints array selecting the A* planner or the Gradient one according to
 considered waypoint. The A* planner has been used in the curved portion of the path,
 while the Gradient planner has been used in the straight portion of the path.'''

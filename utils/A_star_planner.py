@@ -1,6 +1,7 @@
 import math
 import numpy as np
 import json
+
 '''This file contains the A* planner class, to compute the path 
 from a starting node to a goal node exploiting the A* algorithm.
 The heuristic is given by the Eucledian distance between the current node and the goal node.'''
